@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E-Commerce Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f1f5f9;
+    }
+
+    header {
+        background: #0f172a;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* ---------- FILTER PANEL ---------- */
+    aside {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+
+    aside h3 {
+        margin-top: 0;
+        color: #1e293b;
+    }
+
+    label {
+        display: block;
+        margin: 10px 0;
+    }
+
+    /* ---------- PRODUCT GRID ---------- */
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+
+    .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .price {
+        color: #16a34a;
+        font-weight: bold;
+    }
+
+    .rating {
+        color: #f59e0b;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Online Store</h1>
+    <p>Advanced Product Filtering</p>
+</header>
+
+<div class="container">
+
+    <!-- FILTERS -->
+    <aside>
+        <h3>Filter Products</h3>
+
+        <!-- PRICE RANGE -->
+        <label>Price (₹)
+            <input type="range" id="priceRange" min="500" max="5000" value="5000">
+            <span id="priceValue">5000</span>
+        </label>
+
+        <!-- COLOR -->
+        <label>Color</label>
+        <label><input type="checkbox" class="color" value="Red"> Red</label>
+        <label><input type="checkbox" class="color" value="Black"> Black</label>
+        <label><input type="checkbox" class="color" value="Blue"> Blue</label>
+
+        <!-- BRAND -->
+        <label>Brand</label>
+        <select id="brand">
+            <option value="All">All</option>
+            <option value="Nike">Nike</option>
+            <option value="Adidas">Adidas</option>
+            <option value="Puma">Puma</option>
+        </select>
+
+        <!-- RATING -->
+        <label>Rating</label>
+        <label><input type="radio" name="rating" value="4"> 4★ & above</label>
+        <label><input type="radio" name="rating" value="3"> 3★ & above</label>
+        <label><input type="radio" name="rating" value="0" checked> All</label>
+    </aside>
+
+    <!-- PRODUCTS -->
+    <section class="products" id="productList">
+
+        <div class="card" data-price="1999" data-color="Red" data-brand="Nike" data-rating="4">
+            <img src="https://via.placeholder.com/200">
+            <h4>Nike Shoes</h4>
+            <p class="price">₹1999</p>
+            <p class="rating">★★★★</p>
+        </div>
+
+        <div class="card" data-price="2999" data-color="Black" data-brand="Adidas" data-rating="5">
+            <img src="https://via.placeholder.com/200">
+            <h4>Adidas Watch</h4>
+            <p class="price">₹2999</p>
+            <p class="rating">★★★★★</p>
+        </div>
+
+        <div class="card" data-price="1499" data-color="Blue" data-brand="Puma" data-rating="3">
+            <img src="https://via.placeholder.com/200">
+            <h4>Puma Headphones</h4>
+            <p class="price">₹1499</p>
+            <p class="rating">★★★</p>
+        </div>
+
+    </section>
+</div>
+
+<script>
+    const priceRange = document.getElementById("priceRange");
+    const priceValue = document.getElementById("priceValue");
+    const brandSelect = document.getElementById("brand");
+    const products = document.querySelectorAll(".card");
+
+    priceRange.oninput = () => {
+        priceValue.textContent = priceRange.value;
+        filterProducts();
+    };
+
+    brandSelect.onchange = filterProducts;
+    document.querySelectorAll(".color, input[name='rating']")
+        .forEach(el => el.onchange = filterProducts);
+
+    function filterProducts() {
+        const maxPrice = priceRange.value;
+        const brand = brandSelect.value;
+        const rating = document.querySelector("input[name='rating']:checked").value;
+        const colors = Array.from(document.querySelectorAll(".color:checked"))
+                            .map(c => c.value);
+
+        products.forEach(p => {
+            const price = p.dataset.price;
+            const pBrand = p.dataset.brand;
+            const pRating = p.dataset.rating;
+            const pColor = p.dataset.color;
+
+            const priceMatch = price <= maxPrice;
+            const brandMatch = brand === "All" || pBrand === brand;
+            const ratingMatch = pRating >= rating;
+            const colorMatch = colors.length === 0 || colors.includes(pColor);
+
+            p.style.display =
+                priceMatch && brandMatch && ratingMatch && colorMatch
+                ? "block" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>

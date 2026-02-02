@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Semantic Grid & Fixed Sidebar Layout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #eef2f5;
+        }
+
+        h2 {
+            text-align: center;
+            padding: 15px;
+            background: #1f2933;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        /* ================= GRID BASED LAYOUT ================= */
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            grid-template-rows: auto auto 1fr auto;
+            grid-template-areas:
+                "header header header"
+                "nav nav nav"
+                "sidebar main ads"
+                "footer footer footer";
+            gap: 12px;
+            padding: 15px;
+            height: 100vh;
+            background: #e5e9f0;
+        }
+
+        .grid-layout header {
+            grid-area: header;
+            background: #3b82f6;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .grid-layout nav {
+            grid-area: nav;
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .grid-layout main {
+            grid-area: main;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .grid-layout aside.left {
+            grid-area: sidebar;
+            background: #c7d2fe;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .grid-layout aside.right {
+            grid-area: ads;
+            background: #dbeafe;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .grid-layout footer {
+            grid-area: footer;
+            background: #1e40af;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        /* ================= FIXED SIDEBAR LAYOUT ================= */
+
+        .fixed-layout {
+            display: flex;
+        }
+
+        .fixed-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+        }
+
+        .fixed-sidebar a {
+            display: block;
+            color: #cbd5f5;
+            text-decoration: none;
+            margin: 12px 0;
+        }
+
+        .fixed-sidebar a:hover {
+            color: white;
+        }
+
+        .fixed-main {
+            margin-left: 240px;
+            padding: 25px;
+            min-height: 100vh;
+            background: #f8fafc;
+        }
+
+        footer.global {
+            background: #020617;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= GRID BASED LAYOUT ================= -->
+<h2>GRID BASED LAYOUT (Improved)</h2>
+
+<div class="grid-layout">
+    <header>
+        <h3>Header</h3>
+        <p>Semantic header section</p>
+    </header>
+
+    <nav>
+        Home | About | Services | Contact
+    </nav>
+
+    <aside class="left">
+        <h4>Left Sidebar</h4>
+        <p>Navigation links</p>
+    </aside>
+
+    <main>
+        <h3>Main Content</h3>
+        <p>
+            This layout uses CSS Grid with multiple columns and rows.
+            Content is clearly separated into header, navigation,
+            sidebars, main content, and footer.
+        </p>
+        <p>
+            This structure improves readability, responsiveness,
+            and accessibility.
+        </p>
+    </main>
+
+    <aside class="right">
+        <h4>Right Panel</h4>
+        <p>Ads / Widgets</p>
+    </aside>
+
+    <footer>
+        Grid Layout Footer
+    </footer>
+</div>
+
+<!-- ================= FIXED SIDEBAR LAYOUT ================= -->
+<h2>FIXED SIDEBAR LAYOUT</h2>
+
+<div class="fixed-layout">
+    <aside class="fixed-sidebar">
+        <h3>Fixed Sidebar</h3>
+        <a href="#">Dashboard</a>
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+    </aside>
+
+    <main class="fixed-main">
+        <h3>Main Content Area</h3>
+        <p>
+            This layout uses a fixed sidebar that remains visible
+            while the main content scrolls.
+        </p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </main>
+</div>
+
+<footer class="global">
+    © 2026 Semantic Layout Design
+</footer>
+
+</body>
+</html>
