@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tantraz Registration</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+    }
+    form {
+      max-width: 520px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.4rem;
+    }
+    .group {
+      margin-top: 0.5rem;
+    }
+    .group input {
+      width: auto;
+      margin-right: 0.3rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.7rem;
+      background-color: #0078d4;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+
+<body>
+
+<form aria-labelledby="form-title">
+  <h2 id="form-title">Tantraz Registration Form</h2>
+
+  <!-- Full Name (Mandatory) -->
+  <label for="fullname">Full Name *</label>
+  <input
+    type="text"
+    id="fullname"
+    name="fullname"
+    aria-label="Full name"
+    placeholder="Enter your full name"
+    required
+    minlength="3"
+  />
+
+  <!-- Email (Mandatory) -->
+  <label for="email">Email Address *</label>
+  <input
+    type="email"
+    id="email"
+    name="email"
+    aria-label="Email address"
+    placeholder="example@email.com"
+    required
+  />
+
+  <!-- Participation Category (Mandatory) -->
+  <label for="category">Participation Category *</label>
+  <select
+    id="category"
+    name="category"
+    aria-label="Participation category"
+    required
+  >
+    <option value="">-- Select your category --</option>
+    <option value="individual">Individual</option>
+    <option value="team">Team</option>
+    <option value="audience">Audience</option>
+  </select>
+
+  <!-- T-shirt Size -->
+  <label>T-Shirt Size</label>
+  <div class="group" role="radiogroup" aria-label="T-shirt size">
+    <input type="radio" id="s" name="tshirt" value="S" />
+    <label for="s">S</label>
+
+    <input type="radio" id="m" name="tshirt" value="M" />
+    <label for="m">M</label>
+
+    <input type="radio" id="l" name="tshirt" value="L" />
+    <label for="l">L</label>
+
+    <input type="radio" id="xl" name="tshirt" value="XL" />
+    <label for="xl">XL</label>
+  </div>
+
+  <!-- Technical Interests -->
+  <label>Technical Interests</label>
+  <div class="group" role="group" aria-label="Technical interests">
+    <input type="checkbox" id="ai" name="interests" value="AI" />
+    <label for="ai">AI</label>
+
+    <input type="checkbox" id="web" name="interests" value="Web Development" />
+    <label for="web">Web Development</label>
+
+    <input type="checkbox" id="cloud" name="interests" value="Cloud Computing" />
+    <label for="cloud">Cloud Computing</label>
+  </div>
+
+  <!-- Biography / Expectations -->
+  <label for="bio">Expectations / Suggestions</label>
+  <textarea
+    id="bio"
+    name="bio"
+    aria-label="Expectations or suggestions"
+    placeholder="Share your expectations (max 200 characters)"
+    maxlength="200"
+    rows="4"
+  ></textarea>
+
+  <button type="submit">Register</button>
+</form>
+
+</body>
+</html>
