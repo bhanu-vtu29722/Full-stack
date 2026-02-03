@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up</title>
+  <style>
+    form { max-width: 450px; margin: 2rem auto; padding: 1rem; border: 1px solid #ccc; }
+    .error { color: red; font-size: 0.9em; }
+    label { display: block; margin: 0.5rem 0 0.2rem; }
+  </style>
+</head>
+<body>
+  <form id="signUpForm" novalidate>
+    <h2>Create an Account</h2>
+
+    <!-- Name -->
+    <label for="signup-name">Full Name</label>
+    <input
+      type="text"
+      id="signup-name"
+      name="name"
+      aria-label="Full name"
+      required
+      minlength="2"
+    />
+    <span id="signup-name-error" class="error" aria-live="polite"></span>
+
+    <!-- Email -->
+    <label for="signup-email">Email address</label>
+    <input
+      type="email"
+      id="signup-email"
+      name="email"
+      aria-label="Email address"
+      required
+    />
+    <span id="signup-email-error" class="error" aria-live="polite"></span>
+
+    <!-- Password -->
+    <label for="signup-password">Password</label>
+    <input
+      type="password"
+      id="signup-password"
+      name="password"
+      aria-label="Password"
+      required
+      minlength="8"
+    />
+    <span id="signup-password-error" class="error" aria-live="polite"></span>
+
+    <!-- Confirm Password -->
+    <label for="signup-password-confirm">Confirm Password</label>
+    <input
+      type="password"
+      id="signup-password-confirm"
+      name="passwordConfirm"
+      aria-label="Confirm password"
+      required
+      minlength="8"
+    />
+    <span id="signup-password-confirm-error" class="error" aria-live="polite"></span>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <script>
+    const signUpForm = document.getElementById("signUpForm");
+
+    signUpForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Clear old errors
+      document.querySelectorAll(".error").forEach((span) => (span.textContent = ""));
+
+      const name = signUpForm.name;
+      const email = signUpForm.email;
+      const password = signUpForm.password;
+      const passwordConfirm = signUpForm.passwordConfirm;
+      let valid = true;
+
+      // Name validation
+      if (!name.value.trim()) {
+        valid = false;
+        document.getElementById("signup-name-error").textContent =
+          "Full name is required.";
+      } else if (name.value.length < 2) {
+        valid = false;
+        document.getElementById("signup-name-error").textContent =
+          "Name must have at least 2 characters.";
+      }
+
+      // Email validation
+      if (!email.value) {
+        valid = false;
+        document.getElementById("signup-email-error").textContent =
+          "Email is required.";
+      } else if (!email.validity.valid) {
+        valid = false;
+        document.getElementById("signup-email-error").textContent =
+          "Enter a valid email.";
+      }
+
+      // Password validation
+      if (!password.value) {
+        valid = false;
+        document.getElementById("signup-password-error").textContent =
+          "Password is required.";
+      } else if (password.value.length < 8) {
+        valid = false;
+        document.getElementById("signup-password-error").textContent =
+          "Password must be at least 8 characters.";
+      }
+
+      // Confirm password validation
+      if (passwordConfirm.value !== password.value) {
+        valid = false;
+        document.getElementById("signup-password-confirm-error").textContent =
+          "Passwords do not match.";
+      }
+
+      if (valid) {
+        alert("Sign-Up successful (simulated)");
+        signUpForm.reset();
+      }
+    });
+  </script>
+</body>
+</html>

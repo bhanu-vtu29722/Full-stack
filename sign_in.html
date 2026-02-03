@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In</title>
+  <style>
+    form { max-width: 400px; margin: 2rem auto; padding: 1rem; border: 1px solid #ccc; }
+    .error { color: red; font-size: 0.9em; }
+    label { display: block; margin: 0.5rem 0 0.2rem; }
+  </style>
+</head>
+<body>
+  <form id="signInForm" novalidate>
+    <h2>Sign In</h2>
+
+    <!-- Email -->
+    <label for="signin-email">Email address</label>
+    <input
+      type="email"
+      id="signin-email"
+      name="email"
+      aria-label="Email address"
+      required
+    />
+    <span id="signin-email-error" class="error" aria-live="polite"></span>
+
+    <!-- Password -->
+    <label for="signin-password">Password</label>
+    <input
+      type="password"
+      id="signin-password"
+      name="password"
+      aria-label="Password"
+      required
+      minlength="6"
+    />
+    <span id="signin-password-error" class="error" aria-live="polite"></span>
+
+    <button type="submit">Sign In</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("signInForm");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Clear old errors
+      document.getElementById("signin-email-error").textContent = "";
+      document.getElementById("signin-password-error").textContent = "";
+
+      const email = form.email;
+      const password = form.password;
+      let valid = true;
+
+      // Validation: Email
+      if (!email.value) {
+        valid = false;
+        document.getElementById("signin-email-error").textContent =
+          "Email is required.";
+      } else if (!email.validity.valid) {
+        valid = false;
+        document.getElementById("signin-email-error").textContent =
+          "Enter a valid email.";
+      }
+
+      // Validation: Password
+      if (!password.value) {
+        valid = false;
+        document.getElementById("signin-password-error").textContent =
+          "Password is required.";
+      } else if (password.value.length < 6) {
+        valid = false;
+        document.getElementById("signin-password-error").textContent =
+          "Password must be at least 6 characters.";
+      }
+
+      if (valid) {
+        alert("Sign-In successful (simulated)");
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
